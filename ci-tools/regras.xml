@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+
+<ruleset name="Clean Code Rules"
+         xmlns="http://pmd.sf.net/ruleset/1.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://pmd.sf.net/ruleset/1.0.0 http://pmd.sf.net/ruleset_xml_schema.xsd"
+         xsi:noNamespaceSchemaLocation="http://pmd.sf.net/ruleset_xml_schema.xsd">
+
+    <description>
+        Este é um XML de teste
+    </description>
+
+
+    <!-- Aplica todas as regras de outro ruleset, neste caso, estamos verificando códigos não utilizados.-->
+    <rule ref="rulesets/unusedcode.xml" />
+
+    <!-- Aplica somente a regra de complexidade ciclomática   -->
+    <rule ref="rulesets/codesize.xml/CyclomaticComplexity" >
+        <!-- Dentro de uma regra podem ser feitas configurações, para ver quais configurações são possíveis,
+             Basta acessar o xml original da regra, ele contem todas as configurações possíveis para uma regra.
+             EX: rulesets/codesize.xml > RULE CyclomaticComplexity -->
+        <properties>
+            <property name="reportlevel" value="5" />
+        </properties>
+    </rule>
+
+    <!-- É possível excluir algumas regras da execução -->
+    <rule ref="rulesets/naming.xml">
+        <exclude name="ShortVariable" />
+        <!--  Pode ser adicionada mais de uma exclusão -> <exclude name="ShortVariable" />-->
+    </rule>
+    <rule ref="rulesets/naming.xml/ShortVariable">
+        <properties>
+            <!-- Existe uma propriedade de excessões, onde a regra não olhará -->
+            <property name="exceptions">
+                <value>
+                    st
+                </value>
+            </property>
+        </properties>
+    </rule>
+    <rule ref="rulesets/naming.xml/LongVariable">
+        <properties>
+            <!-- Existe uma propriedade de excessões, onde a regra não olhará -->
+            <property name="maximum">
+                <value>
+                    5
+                </value>
+            </property>
+        </properties>
+    </rule>
+
+    <!-- Incluindo a regra cleancode e excluindo a regra StaticAccess -->
+    <rule ref="rulesets/cleancode.xml">
+        <exclude name="StaticAccess" />
+        <exclude name="MissingImport" />
+    </rule>
+
+    <!-- É possível fazer um "overload" de uma regra, para isso, incluimos somente a regra que excluimos na regra anterior  -->
+    <rule ref="rulesets/cleancode.xml/StaticAccess">
+        <properties>
+            <!-- Existe uma propriedade de excessões, onde a regra não olhará -->
+            <property name="exceptions">
+                <value>
+                    \DateTime,
+                    \DateInterval,
+                    \DateTimeZone,
+                    \Nucleo
+                </value>
+            </property>
+        </properties>
+    </rule>
+
+    <rule ref="rulesets/design.xml">
+        <exclude name="DevelopmentCodeFragment" />
+    </rule>
+    <rule ref="rulesets/design.xml/DevelopmentCodeFragment">
+        <properties>
+            <!-- Adicionando a função vl na lista de funções que a regra olha -->
+            <property name="unwanted-functions">
+                <value>
+                    var_dump,
+                    print_r,
+                    debug_zval_dump,
+                    debug_print_backtrace,
+                    vl
+                </value>
+            </property>
+        </properties>
+    </rule>
+
+</ruleset>

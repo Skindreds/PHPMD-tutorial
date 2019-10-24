@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Configurando o PHPMD</title>
+</head>
+<body>
+    <ul>
+        <li>
+            Instalar o PHPMD.
+            <code style="background-color:#ccc;">
+                composer require phpmd/phpmd OU php composer.phar require phpmd/phpmd
+            </code>
+        </li>
+        <li>
+            Executar a seguinte linha de comando no terminal.
+
+            <code style="background-color:#ccc;">
+                vendor\bin\phpmd class html ci-tools/regras.xml --reportfile erros.html --exclude vendor
+
+            </code>
+        </li>
+        <li>
+            Após o comando terminar de ser rodado, Recarregue esta página.
+        </li>
+    </ul>
+</body>
+</html>
